@@ -15,6 +15,12 @@ const AppReducer = (state: InitialState, action: Action) => {
         ),
       };
 
+    case "ADD_TRANSACTION":
+      return {
+        ...state,
+        transactions: [...state.transactions, action.payload],
+      };
+
     default:
       return state;
   }
