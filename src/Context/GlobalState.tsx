@@ -10,6 +10,7 @@ export interface TransactionType {
 export interface InitialState {
   transactions: TransactionType[];
   deleteTransaction?: (id: number) => void;
+  addTransaction?: (transaction: TransactionType) => void;
 }
 
 const initialState: InitialState = {
@@ -39,11 +40,21 @@ const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({
     });
   };
 
+  const addTransaction: (transaction: TransactionType) => void = (
+    transaction: TransactionType
+  ) => {
+    dispatch({
+      type: "ADD_TRANSACTION",
+      payload: transaction,
+    });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         transactions: state.transactions,
         deleteTransaction,
+        addTransaction,
       }}
     >
       {children}
